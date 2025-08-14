@@ -1,4 +1,7 @@
 package com.gestao_escalas.gestao_de_escalas.model.enums;
 
 public enum StatusCobertura{
+    PENDENTEM,
+    ACEITAM,
+    RECUSADA
 }
