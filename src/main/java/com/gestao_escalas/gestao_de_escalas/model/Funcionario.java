@@ -1,6 +1,8 @@
 package com.gestao_escalas.gestao_de_escalas.model;
 
+import com.gestao_escalas.gestao_de_escalas.model.enums.Turno;
 import jakarta.persistence.*;
+import com.gestao_escalas.gestao_de_escalas.model.enums.Funcao;
 import lombok.*;
 
 @Entity
