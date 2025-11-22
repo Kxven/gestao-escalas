@@ -43,6 +43,16 @@ Para os funcionários poderem conversar entre si, para uma possivel troca de dia
 
 • **Controle de escalas fixas e trocas planejadas**
 
+
+
+
+
+
+
+
+
+Esse é meu primeiro REAME, conforme eu for me estudando eu vou corrigindo erros e atualizando ele para vocês!
+
 • **Painel administrativo**
 
 
