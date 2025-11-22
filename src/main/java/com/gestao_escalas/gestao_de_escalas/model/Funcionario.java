@@ -9,11 +9,10 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Funcionario{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String nome;
 
@@ -27,4 +26,11 @@ public class Funcionario{
 
     private boolean disponibilidade;
 
+    public Funcionario(String nome,Funcao funcao,Turno turno,String localizacao,boolean disponibilidade ){
+        this.nome = nome;
+        this.funcao = funcao;
+        this.turno = turno;
+        this.localizacao = localizacao;
+        this.disponibilidade = true;
+    }
 }
