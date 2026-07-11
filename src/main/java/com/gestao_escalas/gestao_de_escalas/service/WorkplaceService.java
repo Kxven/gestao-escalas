@@ -19,11 +19,11 @@ public class WorkplaceService {
 
         //Add address
         AddressEntity address = new AddressEntity();
-        address.setStreet(workplaceRequest.adress().street());
-        address.setNumber(workplaceRequest.adress().number());
-        address.setCity(workplaceRequest.adress().city());
-        address.setState(workplaceRequest.adress().state());
-        address.setZipcode(workplaceRequest.adress().zipcode());
+        address.setStreet(workplaceRequest.address().street());
+        address.setNumber(workplaceRequest.address().number());
+        address.setCity(workplaceRequest.address().city());
+        address.setState(workplaceRequest.address().state());
+        address.setZipcode(workplaceRequest.address().zipcode());
 
         WorkplaceEntity workplace = new WorkplaceEntity();
 
