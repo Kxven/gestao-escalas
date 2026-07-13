@@ -7,7 +7,11 @@ import com.gestao_escalas.gestao_de_escalas.model.EmployeeEntity;
 import com.gestao_escalas.gestao_de_escalas.model.WorkplaceEntity;
 import com.gestao_escalas.gestao_de_escalas.repository.EmployeeRepository;
 import com.gestao_escalas.gestao_de_escalas.repository.WorkPlaceRepository;
+import org.hibernate.query.NativeQuery;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EmployeeService {
@@ -47,5 +51,17 @@ public class EmployeeService {
         employee.setWorkplace(workplace);
         EmployeeEntity savedEmployee = employeeRepository.save(employee);
         return EmployeeResponse.from(savedEmployee);
+    }
+    public EmployeeResponse getById(Long id){
+        EmployeeEntity employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+        return EmployeeResponse.from(employee);
+    }
+    public List<EmployeeResponse> getAllEmployees(){
+         List<EmployeeResponse> employees = employeeRepository.findAll()
+                 .stream()
+                 .map(EmployeeResponse::from)
+                 .toList();
+         return employees;
     }
 }
