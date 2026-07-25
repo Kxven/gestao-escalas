@@ -2,6 +2,7 @@ package com.gestao_escalas.gestao_de_escalas.controller;
 
 import com.gestao_escalas.gestao_de_escalas.dto.EmployeeRequest;
 import com.gestao_escalas.gestao_de_escalas.dto.EmployeeResponse;
+import com.gestao_escalas.gestao_de_escalas.dto.EmployeeUpdateRequest;
 import com.gestao_escalas.gestao_de_escalas.service.EmployeeService;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -35,4 +36,10 @@ public class EmployeeController {
         return  employeeService.getAllEmployees();
     }
 
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public EmployeeResponse updateEmployee(@PathVariable Long id, @RequestBody EmployeeUpdateRequest employee){
+        return employeeService.updateEmployee(id, employee);
+    }
 }
