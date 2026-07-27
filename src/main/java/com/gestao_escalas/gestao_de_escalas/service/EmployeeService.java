@@ -123,4 +123,11 @@ public class EmployeeService {
 
         return EmployeeResponse.from(updateEmployee);
     }
+
+    public void deleteById(Long id){
+        EmployeeEntity employee = employeeRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+        employeeRepository.delete(employee);
+    }
 }
