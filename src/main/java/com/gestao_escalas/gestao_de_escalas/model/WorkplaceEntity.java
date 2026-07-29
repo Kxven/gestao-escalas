@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_posts")
+@Table(name = "tb_workplace")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

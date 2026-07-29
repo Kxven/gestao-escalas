@@ -7,6 +7,8 @@ import com.gestao_escalas.gestao_de_escalas.model.WorkplaceEntity;
 import com.gestao_escalas.gestao_de_escalas.repository.WorkPlaceRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class WorkplaceService {
     private final WorkPlaceRepository workPlaceRepository;
@@ -33,5 +35,21 @@ public class WorkplaceService {
         WorkplaceEntity savedWorkplace = workPlaceRepository.save(workplace);
         return WorkplaceResponse.from(savedWorkplace);
     }
+
+    public WorkplaceResponse getById(Long id){
+        WorkplaceEntity workplace = workPlaceRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Workplace not found"));
+        return WorkplaceResponse.from(workplace);
+    }
+
+    public List<WorkplaceResponse> getAllWorkplaces(){
+        List<WorkplaceResponse> workplaces = workPlaceRepository.findAll()
+                .stream()
+                .map(WorkplaceResponse::from)
+                .toList();
+        return workplaces;
+    }
+
+
 
 }
