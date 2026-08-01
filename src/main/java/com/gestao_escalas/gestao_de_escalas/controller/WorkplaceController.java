@@ -34,4 +34,10 @@ public class WorkplaceController {
     public WorkplaceResponse getById(@PathVariable Long id){
         return workplaceService.getById(id);
     }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public WorkplaceResponse updateWorkplace(@PathVariable Long id, @RequestBody WorkplaceRequest workplaceRequest){
+        return workplaceService.updateWorkplace(id, workplaceRequest);
+    }
 }
