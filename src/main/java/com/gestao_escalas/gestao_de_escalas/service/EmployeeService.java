@@ -1,8 +1,6 @@
 package com.gestao_escalas.gestao_de_escalas.service;
 
-import com.gestao_escalas.gestao_de_escalas.dto.EmployeeRequest;
-import com.gestao_escalas.gestao_de_escalas.dto.EmployeeResponse;
-import com.gestao_escalas.gestao_de_escalas.dto.EmployeeUpdateRequest;
+import com.gestao_escalas.gestao_de_escalas.dto.*;
 import com.gestao_escalas.gestao_de_escalas.model.AddressEntity;
 import com.gestao_escalas.gestao_de_escalas.model.EmployeeEntity;
 import com.gestao_escalas.gestao_de_escalas.model.WorkplaceEntity;
@@ -129,5 +127,15 @@ public class EmployeeService {
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
         employeeRepository.delete(employee);
+    }
+
+    public EmployeeWorkplaceResponse getEmployeeWorkplace(Long id){
+        EmployeeEntity employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+
+        return new EmployeeWorkplaceResponse(
+                EmployeeSumaryResponse.from(employee),
+                WorkplaceSumaryResponse.from(employee.getWorkplace())
+        );
     }
 }

@@ -7,13 +7,13 @@ public record AddressResponse(String street,
                               String city,
                               String state,
                               String zipcode) {
-    public static AddressResponse from(AddressEntity adress){
+    public static AddressResponse from(AddressEntity address){
         return new AddressResponse(
-            adress.getStreet(),
-            adress.getNumber(),
-            adress.getCity(),
-            adress.getState(),
-            adress.getZipcode()
+            address.getStreet(),
+            address.getNumber(),
+            address.getCity(),
+            address.getState(),
+            address.getZipcode()
         );
     }
 }

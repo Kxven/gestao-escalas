@@ -3,6 +3,7 @@ package com.gestao_escalas.gestao_de_escalas.controller;
 import com.gestao_escalas.gestao_de_escalas.dto.EmployeeRequest;
 import com.gestao_escalas.gestao_de_escalas.dto.EmployeeResponse;
 import com.gestao_escalas.gestao_de_escalas.dto.EmployeeUpdateRequest;
+import com.gestao_escalas.gestao_de_escalas.dto.EmployeeWorkplaceResponse;
 import com.gestao_escalas.gestao_de_escalas.service.EmployeeService;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -47,5 +48,11 @@ public class EmployeeController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteEmployee(@PathVariable Long id){
          employeeService.deleteById(id);
+    }
+
+    @GetMapping("/{id}/workplace")
+    @ResponseStatus(HttpStatus.OK)
+    public EmployeeWorkplaceResponse getEmployeeWorkplace(@PathVariable Long id){
+       return employeeService.getEmployeeWorkplace(id);
     }
 }
