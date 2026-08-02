@@ -40,4 +40,10 @@ public class WorkplaceController {
     public WorkplaceResponse updateWorkplace(@PathVariable Long id, @RequestBody WorkplaceRequest workplaceRequest){
         return workplaceService.updateWorkplace(id, workplaceRequest);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteWorkplace(@PathVariable Long id){
+        workplaceService.deleteWorkplace(id);
+    }
 }

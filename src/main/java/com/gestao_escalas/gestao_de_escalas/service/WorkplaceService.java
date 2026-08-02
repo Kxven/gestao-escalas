@@ -92,5 +92,10 @@ public class WorkplaceService {
         return WorkplaceResponse.from(updateWorkplace);
     }
 
+    public void deleteWorkplace(Long id){
+        WorkplaceEntity worplace = workPlaceRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Workplace not found!"));
+        workPlaceRepository.delete(worplace);
+    }
 
 }
