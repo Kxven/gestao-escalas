@@ -1,7 +1,6 @@
 package com.gestao_escalas.gestao_de_escalas.service;
 
-import com.gestao_escalas.gestao_de_escalas.dto.WorkplaceRequest;
-import com.gestao_escalas.gestao_de_escalas.dto.WorkplaceResponse;
+import com.gestao_escalas.gestao_de_escalas.dto.*;
 import com.gestao_escalas.gestao_de_escalas.model.AddressEntity;
 import com.gestao_escalas.gestao_de_escalas.model.WorkplaceEntity;
 import com.gestao_escalas.gestao_de_escalas.repository.WorkPlaceRepository;
@@ -96,6 +95,22 @@ public class WorkplaceService {
         WorkplaceEntity worplace = workPlaceRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Workplace not found!"));
         workPlaceRepository.delete(worplace);
+    }
+
+    public WorkplaceEmployeesResponse getWorkplaceWithEmployees(Long id){
+        WorkplaceEntity workplace = workPlaceRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Workplace not found!"));
+
+        List<EmployeeSumaryResponse> employees = workplace.getEmployees()
+                .stream()
+                .map(EmployeeSumaryResponse::from)
+                .toList();
+        return new WorkplaceEmployeesResponse(
+                workplace.getId(),
+                workplace.getName(),
+                AddressResponse.from(workplace.getAddress()),
+                employees
+        );
     }
 
 }

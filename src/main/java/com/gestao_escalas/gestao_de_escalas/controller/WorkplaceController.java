@@ -1,5 +1,6 @@
 package com.gestao_escalas.gestao_de_escalas.controller;
 
+import com.gestao_escalas.gestao_de_escalas.dto.WorkplaceEmployeesResponse;
 import com.gestao_escalas.gestao_de_escalas.dto.WorkplaceRequest;
 import com.gestao_escalas.gestao_de_escalas.dto.WorkplaceResponse;
 import com.gestao_escalas.gestao_de_escalas.service.WorkplaceService;
@@ -45,5 +46,12 @@ public class WorkplaceController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteWorkplace(@PathVariable Long id){
         workplaceService.deleteWorkplace(id);
+    }
+
+
+    @GetMapping("/{id}/employees")
+    @ResponseStatus(HttpStatus.OK)
+    public WorkplaceEmployeesResponse getWorkplaceWithEmployees(@PathVariable Long id){
+        return workplaceService.getWorkplaceWithEmployees(id);
     }
 }
