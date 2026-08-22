@@ -1,6 +1,8 @@
 package com.gestao_escalas.gestao_de_escalas.service;
 
 import com.gestao_escalas.gestao_de_escalas.dto.*;
+import com.gestao_escalas.gestao_de_escalas.exceptions.EmployeeNotFoundException;
+import com.gestao_escalas.gestao_de_escalas.exceptions.WorkplaceNotFoundException;
 import com.gestao_escalas.gestao_de_escalas.model.AddressEntity;
 import com.gestao_escalas.gestao_de_escalas.model.EmployeeEntity;
 import com.gestao_escalas.gestao_de_escalas.model.WorkplaceEntity;
@@ -25,7 +27,7 @@ public class EmployeeService {
         //Search workplace with id
         WorkplaceEntity workplace = workPlaceRepository
                 .findById(employeeRequest.workplaceId())
-                .orElseThrow(() -> new RuntimeException("Workplace not found"));
+                .orElseThrow(WorkplaceNotFoundException::new);
         //check if exists employee
         if (employeeExists != null){
             throw new RuntimeException("This email already exists");
@@ -52,7 +54,7 @@ public class EmployeeService {
 
     public EmployeeResponse getById(Long id){
         EmployeeEntity employee = employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
+                .orElseThrow(EmployeeNotFoundException::new);
         return EmployeeResponse.from(employee);
     }
 
@@ -66,7 +68,7 @@ public class EmployeeService {
 
     public EmployeeResponse updateEmployee(Long id, EmployeeUpdateRequest employeeRequest){
         EmployeeEntity employee = employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
+                .orElseThrow(EmployeeNotFoundException::new);
 
         if(employeeRequest.name() != null){
             employee.setName(employeeRequest.name());
@@ -84,8 +86,7 @@ public class EmployeeService {
             //Search workplace with id
             WorkplaceEntity workplace = workPlaceRepository
                     .findById(employeeRequest.workplaceId())
-                    .orElseThrow(() -> new RuntimeException("Workplace not found"));
-
+                    .orElseThrow(WorkplaceNotFoundException::new);
             employee.setWorkplace(workplace);
         }
 
@@ -125,13 +126,13 @@ public class EmployeeService {
     public void deleteById(Long id){
         EmployeeEntity employee = employeeRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
+                .orElseThrow(EmployeeNotFoundException::new);
         employeeRepository.delete(employee);
     }
 
     public EmployeeWorkplaceResponse getEmployeeWorkplace(Long id){
         EmployeeEntity employee = employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
+                .orElseThrow(EmployeeNotFoundException::new);
 
         return new EmployeeWorkplaceResponse(
                 EmployeeSumaryResponse.from(employee),

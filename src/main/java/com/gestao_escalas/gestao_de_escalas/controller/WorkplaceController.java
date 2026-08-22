@@ -4,6 +4,7 @@ import com.gestao_escalas.gestao_de_escalas.dto.WorkplaceEmployeesResponse;
 import com.gestao_escalas.gestao_de_escalas.dto.WorkplaceRequest;
 import com.gestao_escalas.gestao_de_escalas.dto.WorkplaceResponse;
 import com.gestao_escalas.gestao_de_escalas.service.WorkplaceService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class WorkplaceController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public WorkplaceResponse registerWorkplace(@RequestBody WorkplaceRequest workplaceRequest){
+    public WorkplaceResponse registerWorkplace(@Valid @RequestBody WorkplaceRequest workplaceRequest){
         return workplaceService.registerWorkplace(workplaceRequest);
     }
 

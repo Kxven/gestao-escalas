@@ -1,6 +1,7 @@
 package com.gestao_escalas.gestao_de_escalas.service;
 
 import com.gestao_escalas.gestao_de_escalas.dto.*;
+import com.gestao_escalas.gestao_de_escalas.exceptions.WorkplaceNotFoundException;
 import com.gestao_escalas.gestao_de_escalas.model.AddressEntity;
 import com.gestao_escalas.gestao_de_escalas.model.WorkplaceEntity;
 import com.gestao_escalas.gestao_de_escalas.repository.WorkPlaceRepository;
@@ -37,7 +38,7 @@ public class WorkplaceService {
 
     public WorkplaceResponse getById(Long id){
         WorkplaceEntity workplace = workPlaceRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Workplace not found"));
+                .orElseThrow(WorkplaceNotFoundException::new);
         return WorkplaceResponse.from(workplace);
     }
 
@@ -51,7 +52,7 @@ public class WorkplaceService {
 
     public WorkplaceResponse updateWorkplace(Long id, WorkplaceRequest workplaceRequest){
         WorkplaceEntity workplace = workPlaceRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Workplace not found"));
+                .orElseThrow(WorkplaceNotFoundException::new);
 
         if(workplaceRequest.name() != null){
             workplace.setName(workplaceRequest.name());
@@ -93,13 +94,13 @@ public class WorkplaceService {
 
     public void deleteWorkplace(Long id){
         WorkplaceEntity worplace = workPlaceRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Workplace not found!"));
+                .orElseThrow(WorkplaceNotFoundException::new);
         workPlaceRepository.delete(worplace);
     }
 
     public WorkplaceEmployeesResponse getWorkplaceWithEmployees(Long id){
         WorkplaceEntity workplace = workPlaceRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Workplace not found!"));
+                .orElseThrow(WorkplaceNotFoundException::new);
 
         List<EmployeeSumaryResponse> employees = workplace.getEmployees()
                 .stream()

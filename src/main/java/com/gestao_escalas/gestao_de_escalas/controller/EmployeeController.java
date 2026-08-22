@@ -5,7 +5,7 @@ import com.gestao_escalas.gestao_de_escalas.dto.EmployeeResponse;
 import com.gestao_escalas.gestao_de_escalas.dto.EmployeeUpdateRequest;
 import com.gestao_escalas.gestao_de_escalas.dto.EmployeeWorkplaceResponse;
 import com.gestao_escalas.gestao_de_escalas.service.EmployeeService;
-import lombok.Getter;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +22,10 @@ public class EmployeeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public EmployeeResponse registerEmployee(@RequestBody EmployeeRequest employee) {
+    public EmployeeResponse registerEmployee(@Valid @RequestBody EmployeeRequest employee) {
         return employeeService.registerEmployee(employee);
     }
+
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public EmployeeResponse getById(@PathVariable Long id){
